@@ -61,4 +61,5 @@ mongoose.connect('mongodb://localhost:27017/QRTarget', function(err, database) {
     });
 });
 
+
 module.exports = app;

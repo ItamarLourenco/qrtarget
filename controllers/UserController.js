@@ -3,7 +3,8 @@ var webResponse = require('../util/WebResponse');
 module.exports = {
     init: function(router){
 
-        router.get('/', function(req, res) {
+        router.get('/:id/edit', function(req, res) {
+            //var params = Object.assign(req.params, req.query); //For example
             User.find({}, function (err, users) {
                 res.send(users);
             })
