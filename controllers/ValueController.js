@@ -1,6 +1,5 @@
 module.exports = {
     init: function(router){
-
         router.get('/', function(req, res, next) {
             res.render('index', { title: 'VALUE' });
         });
@@ -8,8 +7,6 @@ module.exports = {
         router.get('/manolo', function(req, res, next) {
             res.render('index', { title: 'VALUE manolo' });
         });
-
-
         return router;
-    },
+    }
 };

@@ -1,6 +1,7 @@
 const express = require('express');
 module.exports = {
     init: function(app){
+        app.use('/', this.getRouter('HomeController'));
         app.use('/users', this.getRouter('UserController'));
         app.use('/forms', this.getRouter('FormController'));
         app.use('/values', this.getRouter('ValueController'));

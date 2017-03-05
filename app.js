@@ -4,7 +4,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 const appRoutes = require('./routes/routes.js');
 
 var app = express();
@@ -44,12 +45,26 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-MongoClient.connect('mongodb://localhost:27017/QRTarget', function(err, database) {
+
+mongoose.connect('mongodb://localhost:27017/QRTarget', function(err, database) {
     if (err) return console.log(err);
     db = database;
     app.listen(3000, function(){
         console.log('listening on 3000')
     });
 });
+
+
+var kitty = new Cat({ name: '' });
+kitty.save(function (err) {
+    if (err) {
+        for(error in err.errors){
+            console.log(err.errors[error].message);
+        }
+    } else {
+        console.log('meow');
+    }
+});
+
 
 module.exports = app;
