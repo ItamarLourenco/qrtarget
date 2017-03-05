@@ -1,0 +1,12 @@
+{
+	"Please fill in the password.": "Please fill in the password.",
+	"Please fill in the name.": "Please fill in the name.",
+	"Name is longer than 5 characters.": "Name is longer than 5 characters.",
+	"Password is longer than 5 characters.": "Password is longer than 5 characters.",
+	"User validation failed": "User validation failed",
+	"Salvo": "Salvo",
+	"User saved successfully.": "User saved successfully.",
+	"Please fill in the e-mail.": "Please fill in the e-mail.",
+	"Sorry, but this email is not valid.": "Sorry, but this email is not valid.",
+	"Please fill in the e-mail (username).": "Please fill in the e-mail (username)."
+}

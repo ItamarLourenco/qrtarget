@@ -5,12 +5,19 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
 const appRoutes = require('./routes/routes.js');
-
+const i18n = require("i18n");
 var app = express();
 
+mongoose.Promise = require('bluebird');
 var db = null;
+
+
+i18n.configure({
+    locales:['en'],
+    directory: __dirname + '/locales'
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,18 +60,5 @@ mongoose.connect('mongodb://localhost:27017/QRTarget', function(err, database) {
         console.log('listening on 3000')
     });
 });
-
-
-var kitty = new Cat({ name: '' });
-kitty.save(function (err) {
-    if (err) {
-        for(error in err.errors){
-            console.log(err.errors[error].message);
-        }
-    } else {
-        console.log('meow');
-    }
-});
-
 
 module.exports = app;
