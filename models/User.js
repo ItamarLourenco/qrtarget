@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const i18n = require("i18n");
+const md5 = require('md5');
 module.exports = mongoose.model('User',
     {
         name: {
@@ -24,10 +25,13 @@ module.exports = mongoose.model('User',
         },
         password: {
             type: String, required: [true, i18n.__('Please fill in the password.')],
+            set : function(password){
+                return md5(password);
+            },
             validate:
             [
-                function(model){
-                    return model.length >= 5;
+                function(password){
+                    return password.length >= 5;
                 },
                 i18n.__('Password is longer than 5 characters.')
             ]

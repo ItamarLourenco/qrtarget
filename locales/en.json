@@ -8,5 +8,11 @@
 	"User saved successfully.": "User saved successfully.",
 	"Please fill in the e-mail.": "Please fill in the e-mail.",
 	"Sorry, but this email is not valid.": "Sorry, but this email is not valid.",
-	"Please fill in the e-mail (username).": "Please fill in the e-mail (username)."
+	"Please fill in the e-mail (username).": "Please fill in the e-mail (username).",
+	"Cast to ObjectId failed for value \"58bb8db9ee8e1c062d06031\" at path \"_id\" for model \"User\"": "Cast to ObjectId failed for value \"58bb8db9ee8e1c062d06031\" at path \"_id\" for model \"User\"",
+	"No results found.": "No results found.",
+	"Validation failed": "Validation failed",
+	"User successfully changed.": "User successfully changed.",
+	"User successfully removed.": "User successfully removed.",
+	"Please enter a valid ID": "Please enter a valid ID"
 }

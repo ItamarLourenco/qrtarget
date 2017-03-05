@@ -9,14 +9,52 @@ module.exports = {
             })
         });
 
+        /**
+         * For Saved
+         * {"name": "Itamar Lourenço3", "password": 6949519, "username": "itamar.developer@gmail.com"}
+         */
         router.post('/', function(req, res) {
             var user = new User(req.body);
             user.save(function (err) {
                 if(err) return res.send(webResponse.handle(webResponse.REQUEST_ERROR, err.message, false, err));
 
-                res.send(webResponse.handle(webResponse.REQUEST_OK, "User saved successfully.", true))
+                res.send(webResponse.handle(webResponse.REQUEST_OK, "User saved successfully.", true));
             });
         });
+
+        /**
+         * For updated
+         * {"id":"58bbab3d08c6c40b7dbf2783", "name": "Novo nome"}
+         */
+        router.put('/', function(req, res){
+            if(!webResponse.checkId(req.body.id)) return res.send(webResponse.throwErrorCheckId());
+
+            User.findByIdAndUpdate(req.body.id, req.body, {runValidators: true, new: true}, function(err, model){
+                if(err) return res.send(webResponse.handle(webResponse.REQUEST_ERROR, err.message, false, err));
+
+                if(!model) return res.send(webResponse.handle(webResponse.RESULT_NOT_FOUND, 'No results found.', false));
+
+                res.send(webResponse.handle(webResponse.REQUEST_OK, "User successfully changed.", true, model));
+            })
+        });
+
+        /**
+         * For remove
+         * {"id":"58bbab3d08c6c40b7dbf2783"}
+         */
+        router.delete('/', function(req, res){
+            if(!webResponse.checkId(req.body.id)) return res.send(webResponse.throwErrorCheckId());
+
+            User.findOneAndRemove({_id: req.body.id}, function(err, model){
+                if(err) return res.send(webResponse.handle(webResponse.REQUEST_ERROR, err.message, false, err));
+
+                if(!model) return res.send(webResponse.handle(webResponse.RESULT_NOT_FOUND, 'No results found.', false));
+
+                res.send(webResponse.handle(webResponse.REQUEST_OK, "User successfully removed.", true));
+            });
+        });
+
+
         return router;
-    },
+    }
 };
