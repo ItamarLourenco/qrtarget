@@ -37,13 +37,8 @@ module.exports = {
         };
     },
     checkId: function(id){
-        return ObjectId.isValid(id);
+        if(!ObjectId.isValid(id)){
+            throw this.handle(this.VALIDATION_ERROR, "Please enter a valid ID", false);
+        }
     },
-    throwErrorCheckId: function(){
-        return {
-            code: this.VALIDATION_ERROR,
-            message: i18n.__("Please enter a valid ID"),
-            success: false,
-        };
-    }
 };

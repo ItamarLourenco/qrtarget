@@ -3,7 +3,7 @@ var webResponse = require('../util/WebResponse');
 module.exports = {
     init: function(router){
 
-        router.get('/:id/edit', function(req, res) {
+        router.get('/', function(req, res) {
             //var params = Object.assign(req.params, req.query); //For example
             User.find({}, function (err, users) {
                 res.send(users);
@@ -28,7 +28,7 @@ module.exports = {
          * {"id":"58bbab3d08c6c40b7dbf2783", "name": "Novo nome"}
          */
         router.put('/', function(req, res){
-            if(!webResponse.checkId(req.body.id)) return res.send(webResponse.throwErrorCheckId());
+            try { webResponse.checkId(req.body.id) } catch (e) { return res.send(e) }
 
             User.findByIdAndUpdate(req.body.id, req.body, {runValidators: true, new: true}, function(err, model){
                 if(err) return res.send(webResponse.handle(webResponse.REQUEST_ERROR, err.message, false, err));
@@ -44,7 +44,7 @@ module.exports = {
          * {"id":"58bbab3d08c6c40b7dbf2783"}
          */
         router.delete('/', function(req, res){
-            if(!webResponse.checkId(req.body.id)) return res.send(webResponse.throwErrorCheckId());
+            try { webResponse.checkId(req.body.id) } catch (e) { return res.send(e) }
 
             User.findOneAndRemove({_id: req.body.id}, function(err, model){
                 if(err) return res.send(webResponse.handle(webResponse.REQUEST_ERROR, err.message, false, err));
