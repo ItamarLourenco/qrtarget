@@ -1,4 +1,5 @@
 const express = require('express');
+var api = require('../routes/Api');
 module.exports = {
     init: function(app){
         app.use('/', this.getRouter('HomeController'));
@@ -8,8 +9,9 @@ module.exports = {
     },
 
     getRouter: function(controller){
-        const router = express.Router();
+        var router = express.Router();
         require('../controllers/' + controller + '.js').init(router);
+        router = api(router);
         return router;
     }
 };

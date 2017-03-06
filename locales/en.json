@@ -14,5 +14,11 @@
 	"Validation failed": "Validation failed",
 	"User successfully changed.": "User successfully changed.",
 	"User successfully removed.": "User successfully removed.",
-	"Please enter a valid ID": "Please enter a valid ID"
+	"Please enter a valid ID": "Please enter a valid ID",
+	"Nothing to show.": "Nothing to show.",
+	"Nothing to show. \n /authenticate by login": "Nothing to show. \n /authenticate by login",
+	"Please enter with username and password": "Please enter with username and password",
+	"Successful login.": "Successful login.",
+	"No user found.": "No user found.",
+	"Please enter a valid authentication key": "Please enter a valid authentication key"
 }

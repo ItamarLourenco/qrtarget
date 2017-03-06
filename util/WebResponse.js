@@ -3,6 +3,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
 
+    NOT_AUTHORIZED: -4,
     RESULT_NOT_FOUND: -3,
     VALIDATION_ERROR: -2,
     REQUEST_ERROR: -1,
