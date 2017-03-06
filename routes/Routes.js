@@ -1,5 +1,5 @@
 const express = require('express');
-var api = require('../routes/Api');
+var api = require('./Api');
 module.exports = {
     init: function(app){
         app.use('/', this.getRouter('HomeController'));
