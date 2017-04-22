@@ -7,7 +7,7 @@ module.exports = {
         router.post('/', function(req, res){
             var user = new User(req.body);
             if(user.validateLogin()){
-                user = user.prepareForAuthenticate(user);
+                user = user.prepareForAuthenticate();
                 User.findOne(user, function(err, model){
                     if(model){
                         model.generateAuthKey();

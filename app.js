@@ -5,18 +5,14 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const il8n = require('./util/Custom-il8n');
 const appRoutes = require('./routes/Routes.js');
-const i18n = require("i18n");
 var app = express();
+
 
 mongoose.Promise = require('bluebird');
 var db = null;
 
-
-i18n.configure({
-    locales:['en'],
-    directory: __dirname + '/locales'
-});
 
 
 // view engine setup

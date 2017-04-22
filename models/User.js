@@ -41,16 +41,17 @@ var userSchema = new mongoose.Schema({
       type: String
     },
     __v: {
-        type: Number, select: false
-    },
+        type: Number,
+        select: false
+    }
 });
 
 userSchema.methods.validateLogin = function () {
     return (this.password !== undefined && this.password !== '') && (this.username !== undefined && this.username !== '');
 };
 
-userSchema.methods.prepareForAuthenticate = function(user){
-    return {username: user.username, password: user.password};
+userSchema.methods.prepareForAuthenticate = function(){
+    return {username: this.username, password: this.password};
 };
 
 userSchema.methods.generateAuthKey = function (isReturn) {
