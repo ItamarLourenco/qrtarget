@@ -20,5 +20,10 @@
 	"Please enter with username and password": "Please enter with username and password",
 	"Successful login.": "Successful login.",
 	"No user found.": "No user found.",
-	"Please enter a valid authentication key": "Please enter a valid authentication key"
+	"Please enter a valid authentication key": "Please enter a valid authentication key",
+	"document must have an _id before saving": "document must have an _id before saving",
+	"E11000 duplicate key error collection: QRTarget.users index: user.username_1 dup key: { : null }": "E11000 duplicate key error collection: QRTarget.users index: user.username_1 dup key: { : null }",
+	"E11000 duplicate key error collection: QRTarget.users index: username_1 dup key: { : \"itamar1w.dev312312eloper2@gmail.com\" }": "E11000 duplicate key error collection: QRTarget.users index: username_1 dup key: { : \"itamar1w.dev312312eloper2@gmail.com\" }",
+	"E11000 duplicate key error collection: QRTarget.users index: username_1 dup key: { : \"itamar.developer@gmail.com\" }": "E11000 duplicate key error collection: QRTarget.users index: username_1 dup key: { : \"itamar.developer@gmail.com\" }",
+	"Duplicate username": "Duplicate username"
 }

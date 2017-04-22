@@ -1,3 +1,4 @@
+'use strict';
 const i18n = require("i18n");
 var ObjectId = require('mongoose').Types.ObjectId;
 
@@ -10,26 +11,34 @@ module.exports = {
     REQUEST_OK: 1,
 
     handle:function(code, message, success, json){
-
         //Errors Validations
-        if(json != null && json.hasOwnProperty('errors') && json.errors != undefined) {
-            var messageError = [];
-            for(erro in json.errors){
-                messageError.push(json.errors[erro].message);
+        if(json !== undefined && json !== null){
+            if(json.hasOwnProperty('errors') && json.errors !== undefined) {
+                var messageError = [];
+                var error;
+
+                for(error in json.errors){
+                    if(json.hasOwnProperty('erro')){
+                        messageError.push(json.errors[error].message);
+                    }
+                }
+
+                success = false;
+                code = this.VALIDATION_ERROR;
+                json = messageError;
             }
 
-            success = false;
-            code = this.VALIDATION_ERROR;
-            json = messageError;
+
+            //Error not found
+            if(json.hasOwnProperty('name') && json.name === 'CastError') {
+                message = 'No results found.';
+                code = this.RESULT_NOT_FOUND;
+            }
+
+            if(json.hasOwnProperty('code')){
+                message = this.handleErrorCode(json.code) ? this.handleErrorCode(json.code) : message;    
+            }
         }
-
-
-        //Error not found
-        if(json != null && json.hasOwnProperty('name') && json.name == 'CastError') {
-            message = 'No results found.'
-            code = this.RESULT_NOT_FOUND;
-        }
-
         return {
             code: code,
             message: i18n.__(message),
@@ -42,4 +51,12 @@ module.exports = {
             throw this.handle(this.VALIDATION_ERROR, "Please enter a valid ID", false);
         }
     },
+    handleErrorCode: function(code){
+        switch (code){
+            case 11000:
+                return i18n.__("Duplicate username");
+        }
+
+        return false;
+    }
 };

@@ -3,6 +3,7 @@ var api = require('./Api');
 module.exports = {
     init: function(app){
         app.use('/', this.getRouter('HomeController'));
+        app.use('/authenticate', this.getRouter('AuthenticateController'));
         app.use('/users', this.getRouter('UserController'));
         app.use('/forms', this.getRouter('FormController'));
         app.use('/values', this.getRouter('ValueController'));

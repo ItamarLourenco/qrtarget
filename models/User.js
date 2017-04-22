@@ -1,3 +1,4 @@
+'use strict';
 const mongoose = require('mongoose');
 const i18n = require("i18n");
 const md5 = require('md5');
@@ -26,7 +27,7 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String, required: [true, i18n.__('Please fill in the password.')],
         set : function(password){
-            return password != '' ? md5(password) : '';
+            return password !== '' ? md5(password.toString()) : '';
         },
         validate:
             [
@@ -42,11 +43,14 @@ var userSchema = new mongoose.Schema({
     __v: {
         type: Number, select: false
     },
-    _id: false
 });
 
 userSchema.methods.validateLogin = function () {
-    return (this.password != undefined && this.password != '') && (this.username != undefined && this.username != '');
+    return (this.password !== undefined && this.password !== '') && (this.username !== undefined && this.username !== '');
+};
+
+userSchema.methods.prepareForAuthenticate = function(user){
+    return {username: user.username, password: user.password};
 };
 
 userSchema.methods.generateAuthKey = function (isReturn) {
