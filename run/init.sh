@@ -1,1 +1,2 @@
-./node_modules/.bin/nodemon app.js 
+mongod &
+./node_modules/.bin/nodemon app.js
