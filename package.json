@@ -3,6 +3,10 @@
     "chai": "^3.5.0"
   },
   "dependencies": {
-    "i18n": "^0.8.3"
+    "i18n": "^0.8.3",
+    "request": "^2.81.0"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }

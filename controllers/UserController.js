@@ -1,7 +1,7 @@
 'use strict';
 var User = require("../models/User");
 var webResponse = require('../util/WebResponse');
-
+const md5 = require('md5');
 module.exports = {
     init: function(router){
 
@@ -36,7 +36,7 @@ module.exports = {
                 if(!model) return res.send(webResponse.handle(webResponse.RESULT_NOT_FOUND, 'No results found.', false));
 
                 res.send(webResponse.handle(webResponse.REQUEST_OK, "User successfully changed.", true, model));
-            })
+            });
         });
 
         /**

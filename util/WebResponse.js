@@ -4,23 +4,19 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
 
-    NOT_AUTHORIZED: -4,
     RESULT_NOT_FOUND: -3,
     VALIDATION_ERROR: -2,
     REQUEST_ERROR: -1,
     REQUEST_OK: 1,
 
     handle:function(code, message, success, json){
-        //Errors Validations
-        if(json !== undefined && json !== null){
-            if(json.hasOwnProperty('errors') && json.errors !== undefined) {
+        if(typeof json !== 'undefined'){
+            //Errors Validations
+            if(json !== null && typeof json.errors !== 'undefined' && json.errors !== undefined) {
                 var messageError = [];
-                var error;
-
-                for(error in json.errors){
-                    if(json.hasOwnProperty('erro')){
-                        messageError.push(json.errors[error].message);
-                    }
+                var erro;
+                for(erro in json.errors){
+                    messageError.push(json.errors[erro].message);
                 }
 
                 success = false;
@@ -30,14 +26,14 @@ module.exports = {
 
 
             //Error not found
-            if(json.hasOwnProperty('name') && json.name === 'CastError') {
+            if(json !== null && typeof json.name !== 'undefined' && json.name === 'CastError') {
                 message = 'No results found.';
                 code = this.RESULT_NOT_FOUND;
             }
 
-            if(json.hasOwnProperty('code')){
-                message = this.handleErrorCode(json.code) ? this.handleErrorCode(json.code) : message;    
-            }
+            try{
+                message = this.handleErrorCode(json.code) ? this.handleErrorCode(json.code) : message;
+            }catch (e){}
         }
         return {
             code: code,
@@ -58,5 +54,5 @@ module.exports = {
         }
 
         return false;
-    }
+    },
 };

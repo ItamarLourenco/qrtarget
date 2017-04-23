@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const i18n = require("i18n");
 const md5 = require('md5');
-
+var originalPassword = null;
 var userSchema = new mongoose.Schema({
     name: {
         type: String, required: [true, i18n.__('Please fill in the name.')],
@@ -27,12 +27,13 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String, required: [true, i18n.__('Please fill in the password.')],
         set : function(password){
+            originalPassword = password;
             return password !== '' ? md5(password.toString()) : '';
         },
         validate:
             [
-                function(password){
-                    return password.length >= 5;
+                function(){
+                    return originalPassword.length >= 5;
                 },
                 i18n.__('Password is longer than 5 characters.')
             ]
@@ -52,6 +53,10 @@ userSchema.methods.validateLogin = function () {
 
 userSchema.methods.prepareForAuthenticate = function(){
     return {username: this.username, password: this.password};
+};
+
+userSchema.methods.findByIdAndUpdateUser = function(id, object, callback){
+
 };
 
 userSchema.methods.generateAuthKey = function (isReturn) {

@@ -1,1 +1,1 @@
-mocha tests --recursive
+mocha tests $1
